@@ -86,7 +86,7 @@ void displayFourcc(const fourccValue& fourcc)
 
 int main(int argc, const char* argv[])
 {
-    char filename[1000] = "D:\\audio\\SAM-Free - Gravity=Reality.wav";
+    char filename[1000] = "";
     if (argc > 2) {
         strcpy(filename, argv[1]);
     }
