@@ -1,8 +1,9 @@
 # audio
 
-https://xiph.org/flac/format.html
+https://xiph.org/flac/format.html  
+https://www.xiph.org/vorbis/doc/v-comment.html  
 
-http://www.cnblogs.com/caosiyang/archive/2012/07/16/2594029.html
+http://www.cnblogs.com/caosiyang/archive/2012/07/16/2594029.html  
 
 STREAMINFO,PADDING,APPLICATION,SEEKTABLE,VORBIS_COMMENT,CUESHEET,PICTURE
 
