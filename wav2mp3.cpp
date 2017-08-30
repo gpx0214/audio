@@ -105,6 +105,7 @@ int dataProcess(int fd, int len, const struct fmtHead &head) {
 
         } else {
             delete[] blockIn;
+			delete[] MP3OutputBuffer;
             return len - byteToRead;
         }
         /*
@@ -121,6 +122,7 @@ int dataProcess(int fd, int len, const struct fmtHead &head) {
     }
 	close(mp3fd);
     delete[] blockIn;
+    delete[] MP3OutputBuffer;
     return len - byteToRead;
 }
 
