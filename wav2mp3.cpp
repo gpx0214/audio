@@ -32,7 +32,7 @@ int fmtProcess(int fd, int len, struct fmtHead* head)
     int ret = 0;
     int readSize = read(fd, head, 16);
     if (readSize) ret += readSize;
-    printf("format:0x%04x %dch %dByte %dByte %dByte %dbit\n",
+    printf("format:0x%04x %dch %dHz %dByte/s %dByte/Sample %dbit\n",
             head->format & 0xffff,
             head->channel,
             head->samplerate,
@@ -50,7 +50,7 @@ int fmtProcess(int fd, int len, struct fmtHead* head)
     lame_set_out_samplerate(m_LameGlobalFlags, head->samplerate);
     lame_set_num_channels(m_LameGlobalFlags, head->channel);
     lame_set_mode(m_LameGlobalFlags, STEREO);
-    lame_set_brate(m_LameGlobalFlags, 320);
+    lame_set_brate(m_LameGlobalFlags, 128);
 
     char currentDate[5] = "2017";
 
@@ -82,13 +82,13 @@ int dataProcess(int fd, int len, const struct fmtHead &head) {
 	int sampleSize = lame_get_framesize(m_LameGlobalFlags);
 	int frameSize = sampleSize * head.bitDepth /8 * head.channel;
 
-    int blockInSize = frameSize*4;
+    int blockInSize = 10000;//frameSize*4;
     char* blockIn = new char[blockInSize];
 	
 	unsigned char *MP3OutputBuffer = new unsigned char[1024*1024*1];
 	
 	int encode_bytes = 0;
-	int mp3fd = open("D:/lame-3.99.5/include/3.mp3", O_WRONLY|O_BINARY|O_CREAT);
+	int mp3fd = open("1.mp3", O_WRONLY|O_BINARY|O_CREAT);
     while (byteToRead) {
         readSize = read(fd, blockIn, blockInSize);
         if (readSize > 0) {
@@ -99,8 +99,8 @@ int dataProcess(int fd, int len, const struct fmtHead &head) {
                                                           readSize / (head.bitDepth /8 * head.channel),//sampleSize,
                                                           MP3OutputBuffer,
                                                           frameSize);
-			//printf("encode_bytes %d\n", encode_bytes);
-            if (encode_bytes) write(mp3fd, MP3OutputBuffer, encode_bytes);														  
+			printf("readSize %5d encode_bytes %5d\n", readSize, encode_bytes);
+            if (encode_bytes > 0) write(mp3fd, MP3OutputBuffer, encode_bytes);														  
 														  
 
         } else {
@@ -139,7 +139,7 @@ void displayFourcc(const fourccValue& fourcc)
 
 int main(int argc, const char* argv[])
 {
-    char filename[1000] = "D:\\_music\\SAM-Free - Gravity=Reality.wav";
+    char filename[1000] = "1.wav";
     if (argc > 2) {
         strcpy(filename, argv[1]);
     }
