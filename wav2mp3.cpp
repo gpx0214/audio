@@ -10,7 +10,7 @@
 int    readSize;
 int8_t blockIn[BLOCKSIZE];
 
-struct lame_global_struct* m_LameGlobalFlags = NULL;
+struct lame_global_struct* g_LameGlobalFlags = NULL;
 
 #pragma pack(1)
 struct fourccValue{
@@ -44,68 +44,68 @@ int fmtProcess(int fd, int len, struct fmtHead* head)
         readSize = read(fd, &blockIn, len - 16);
         if (readSize) ret += readSize;
     }
-	
-	m_LameGlobalFlags = lame_init();
-    lame_set_in_samplerate(m_LameGlobalFlags, head->samplerate);
-    lame_set_out_samplerate(m_LameGlobalFlags, head->samplerate);
-    lame_set_num_channels(m_LameGlobalFlags, head->channel);
-    lame_set_mode(m_LameGlobalFlags, STEREO);
-    lame_set_brate(m_LameGlobalFlags, 128);
+    
+    g_LameGlobalFlags = lame_init();
+    lame_set_in_samplerate(g_LameGlobalFlags, head->samplerate);
+    lame_set_out_samplerate(g_LameGlobalFlags, head->samplerate);
+    lame_set_num_channels(g_LameGlobalFlags, head->channel);
+    lame_set_mode(g_LameGlobalFlags, STEREO);
+    lame_set_brate(g_LameGlobalFlags, 128);
 
     char currentDate[5] = "2017";
 
-    lame_set_write_id3tag_automatic(m_LameGlobalFlags, 1);
+    lame_set_write_id3tag_automatic(g_LameGlobalFlags, 1);
 
     char title[30]    = "";
     char artist[30]   = "";
     char album[30]    = "";
 
-    id3tag_init(m_LameGlobalFlags);
-    id3tag_space_v1(m_LameGlobalFlags);
-    id3tag_set_artist(m_LameGlobalFlags, artist);
-    id3tag_set_title(m_LameGlobalFlags, title);
-    id3tag_set_album(m_LameGlobalFlags, album);
-    id3tag_set_track(m_LameGlobalFlags, "1");
-    id3tag_set_year(m_LameGlobalFlags, currentDate);
-    id3tag_set_comment(m_LameGlobalFlags, "");
-    id3tag_set_genre(m_LameGlobalFlags, "Unknown");
+    id3tag_init(g_LameGlobalFlags);
+    id3tag_space_v1(g_LameGlobalFlags);
+    id3tag_set_artist(g_LameGlobalFlags, artist);
+    id3tag_set_title(g_LameGlobalFlags, title);
+    id3tag_set_album(g_LameGlobalFlags, album);
+    id3tag_set_track(g_LameGlobalFlags, "1");
+    id3tag_set_year(g_LameGlobalFlags, currentDate);
+    id3tag_set_comment(g_LameGlobalFlags, "");
+    id3tag_set_genre(g_LameGlobalFlags, "Unknown");
 
-    lame_init_params(m_LameGlobalFlags);
-	
-	return ret;
+    lame_init_params(g_LameGlobalFlags);
+    
+    return ret;
 }
 
 int dataProcess(int fd, int len, const struct fmtHead &head) {
     int byteToRead = len;
     int readSize = 0;
 
-	int sampleSize = lame_get_framesize(m_LameGlobalFlags);
-	int frameSize = sampleSize * head.bitDepth /8 * head.channel;
+    int sampleSize = lame_get_framesize(g_LameGlobalFlags);
+    int frameSize = sampleSize * head.bitDepth /8 * head.channel;
 
     int blockInSize = 10000;//frameSize*4;
     char* blockIn = new char[blockInSize];
-	
-	unsigned char *MP3OutputBuffer = new unsigned char[1024*1024*1];
-	
-	int encode_bytes = 0;
-	int mp3fd = open("1.mp3", O_WRONLY|O_BINARY|O_CREAT);
+    
+    unsigned char *MP3OutputBuffer = new unsigned char[1024*1024*1];
+    
+    int encode_bytes = 0;
+    int mp3fd = open("1.mp3", O_WRONLY|O_BINARY|O_CREAT);
     while (byteToRead) {
         readSize = read(fd, blockIn, blockInSize);
         if (readSize > 0) {
             byteToRead -= readSize;
             //printf("%d %d %d\n",fd, readSize, byteToRead);
-			encode_bytes = lame_encode_buffer_interleaved(m_LameGlobalFlags,
+            encode_bytes = lame_encode_buffer_interleaved(g_LameGlobalFlags,
                                                           (short int*)blockIn,
                                                           readSize / (head.bitDepth /8 * head.channel),//sampleSize,
                                                           MP3OutputBuffer,
                                                           frameSize);
-			printf("readSize %5d encode_bytes %5d\n", readSize, encode_bytes);
-            if (encode_bytes > 0) write(mp3fd, MP3OutputBuffer, encode_bytes);														  
-														  
+            printf("readSize %5d encode_bytes %5d\n", readSize, encode_bytes);
+            if (encode_bytes > 0) write(mp3fd, MP3OutputBuffer, encode_bytes);                                                          
+                                                          
 
         } else {
             delete[] blockIn;
-			delete[] MP3OutputBuffer;
+            delete[] MP3OutputBuffer;
             return len - byteToRead;
         }
         /*
@@ -120,7 +120,7 @@ int dataProcess(int fd, int len, const struct fmtHead &head) {
         printf("\n");
         */
     }
-	close(mp3fd);
+    close(mp3fd);
     delete[] blockIn;
     delete[] MP3OutputBuffer;
     return len - byteToRead;
