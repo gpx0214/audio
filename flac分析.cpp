@@ -38,7 +38,7 @@ struct flacSeekPoint {
 
 struct flacFrameHead{
 	uint8_t head[4];
-}
+};
 #pragma pack()
 
 int bigFourccToInt(char* str)
@@ -46,10 +46,12 @@ int bigFourccToInt(char* str)
     return (str[0] << 8*3) + (str[1] << 8*2)+ (str[2] << 8*1)+ str[3];
 }
 
-int64_t big8ByteToInt64(uint8_t* str)
+uint64_t big8ByteToInt64(uint8_t* str)
 {
-    return ( (str[0] << 8*7) + (str[1] << 8*6)+ (str[2] << 8*5)+ (str[3] << 8*4)
-         + (str[4] << 8*3) + (str[5] << 8*2)+ (str[6] << 8*1)+ (str[7]) );
+    return ( ((uint64_t)str[0] << 8*7) + ((uint64_t)str[1] << 8*6) 
+	       + ((uint64_t)str[2] << 8*5) + ((uint64_t)str[3] << 8*4)
+           + ((uint64_t)str[4] << 8*3) + ((uint64_t)str[5] << 8*2)
+		   + ((uint64_t)str[6] << 8*1)+ (str[7]) );
 }
 
 void process0(int fd, int len)
@@ -117,7 +119,7 @@ void process4(int fd, int len)
     byteToRead -= read(fd, &vendor_string, vendor_length);
 
     printf("%u\n", vendor_length);
-    for (int i = 0; i < vendor_length; i++) {
+    for (uint32_t i = 0; i < vendor_length; i++) {
         printf("%c", vendor_string[i]);
     }
     printf("\n");
@@ -130,7 +132,7 @@ void process4(int fd, int len)
         byteToRead -= read(fd, &vendor_string, vendor_length);
         printf("[%5u]", vendor_length);
         if (vendor_length < 256)
-        for (int i = 0; i < vendor_length; i++) {
+        for (uint32_t i = 0; i < vendor_length; i++) {
             printf("%c", vendor_string[i]);
         }
         printf("\n");
@@ -253,7 +255,7 @@ void displayFourcc(const fourccValue& fourcc)
 
 int main(int argc, const char* argv[])
 {
-    char filename[1000] = "D:\\1.flac";
+    char filename[1000] = "D:\\_music\\01. Heartbreak Hotel (Feat. Simon Dominic).flac";
     if (argc > 1) {
         strcpy(filename, argv[1]);
     }
@@ -278,10 +280,21 @@ int main(int argc, const char* argv[])
 		return 0;
 	}
 
+	char* headerTypeHead[7] = {
+		"STREAMINFO",
+		"PADDING",
+		"APPLICATION",
+		"SEEKTABLE",
+		"VORBIS_COMMENT",
+		"CUESHEET",
+		"PICTURE"
+	};
+	
     while (true) {
         readSize = read(fd, &head, 4);
     	flacBlockHeadSize = (head.size[0] << 16) + (head.size[1] << 8) + head.size[2];
-    	printf("type=%2d size=%9d\n", head.blockType & 0x7f, flacBlockHeadSize);
+    	printf("type=%2d size=%9d %s\n", head.blockType & 0x7f, flacBlockHeadSize,
+		                              headerTypeHead[(head.blockType & 0x7f)]);
 
     	switch (head.blockType & 0x7f) {
     	case 0:
