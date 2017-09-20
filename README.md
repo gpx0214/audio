@@ -5,7 +5,7 @@ https://www.xiph.org/vorbis/doc/v-comment.html
 
 http://www.cnblogs.com/caosiyang/archive/2012/07/16/2594029.html  
 
-STREAMINFO,PADDING,APPLICATION,SEEKTABLE,VORBIS_COMMENT,CUESHEET,PICTURE
+
 
 14 1 1
 4 4 4 3 1
