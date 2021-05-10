@@ -79,3 +79,6 @@ http://satellitepull.cnr.cn/live/wxbjxwgb/playlist.m3u8
 192 http://satellitepull.cnr.cn/live/wxhitfm/playlist.m3u8
 192 http://satellitepull.cnr.cn/live/wxhqzx01/playlist.m3u8
 192 http://satellitepull.cnr.cn/live/wxdjy/playlist.m3u8
+
+http://playback.rbc.cn/audioD/fm1039/20171204/0730007200_mp4/073000_7200_96K.mp4
+http://playback.rbc.cn/audioD/fm1039/20171204/0730007200_mp4/073000_7200_96K.mp4
