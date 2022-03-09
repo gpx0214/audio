@@ -1,0 +1,10 @@
+https://cctv5txyh5c.liveplay.myqcloud.com/live/cdrmcctv5_1/index.m3u8
+https://cctv5txyh5c.liveplay.myqcloud.com/live/cdrmcctv5_1_md.m3u8
+https://cctv5txyh5c.liveplay.myqcloud.com/live/cdrmcctv5_1_td.m3u8
+
+https://cctv5bdh5c.a.bdydns.com/live/cdrmcctv16_1/index.m3u8?BR=md
+https://cctv5bdh5c.a.bdydns.com/live/cdrmcctv16_1/index.m3u8?BR=td
+
+https://cctv5ksh5c.v.kcdnvip.com/live/cdrmcctv5plus_1/index.m3u8?BR=td&region=shanghai
+
+https://cctvksh5c.v.kcdnvip.com/live/cdrmcctv1_1/index.m3u8?BR=td&region=shanghai
