@@ -1,22 +1,22 @@
 ffplay.exe -autoexit -showmode 2 -x 640 -y 512 https://brtv-radiolive.rbc.cn/alive/fm1039.m3u8
 
-ffplay.exe -autoexit -showmode 2 -x 640 -y 512 http://satellitepull.cnr.cn/live/wxgjlxyy/playlist.m3u8
+// ffplay.exe -autoexit -showmode 2 -x 640 -y 512 http://satellitepull.cnr.cn/live/wxgjlxyy/playlist.m3u8
 
 
 CRI aac-lc 128~192k/48.0
-http://sk.cri.cn/887.m3u8
-http://sk.cri.cn/915.m3u8
+http://sk.cri.cn/887.m3u8 251223地址停用
+http://sk.cri.cn/915.m3u8 251223地址停用
 http://sk.cri.cn/905.m3u8
 http://sk.cri.cn/am846.m3u8
 http://sk.cri.cn/hyhq.m3u8 华语环球(CRI Chinese Service)
 http://sk.cri.cn/nhzs.m3u8 南海之声
 http://satellitepull.cnr.cn/live/wxnhzs/playlist.m3u8
 
-http://nhzs-lh.akamaihd.net/i/nhzs_1@381075/master.m3u8
-http://hyhq-lh.akamaihd.net/i/hyhq_1@381074/index_48_a-p.m3u8?sd=10&rebase=on
+// http://nhzs-lh.akamaihd.net/i/nhzs_1@381075/master.m3u8
+// http://hyhq-lh.akamaihd.net/i/hyhq_1@381074/index_48_a-p.m3u8?sd=10&rebase=on
 
-192 http://satellitepull.cnr.cn/live/wxgjlxyy/playlist.m3u8
-192 http://satellitepull.cnr.cn/live/wxhitfm/playlist.m3u8
+192 http://satellitepull.cnr.cn/live/wxgjlxyy/playlist.m3u8 251223地址停用
+192 http://satellitepull.cnr.cn/live/wxhitfm/playlist.m3u8 251223地址停用
 192 http://satellitepull.cnr.cn/live/wxhqzx01/playlist.m3u8 环球资讯
 192 http://satellitepull.cnr.cn/live/wxdjy/playlist.m3u8
 
@@ -26,17 +26,17 @@ http://hyhq-lh.akamaihd.net/i/hyhq_1@381074/index_48_a-p.m3u8?sd=10&rebase=on
 BRTV aac-lc 96k/48.0
 新闻广播 https://brtv-radiolive.rbc.cn/alive/fm945.m3u8
 城市广播 https://brtv-radiolive.rbc.cn/alive/fm1073.m3u8
-故事广播 https://brtv-radiolive.rbc.cn/alive/am603.m3u8
+故事广播 https://brtv-radiolive.rbc.cn/alive/am603.m3u8 无声音
 体育广播 https://brtv-radiolive.rbc.cn/alive/fm1025.m3u8
 音乐广播 https://brtv-radiolive.rbc.cn/alive/fm974.m3u8
 交通广播 https://brtv-radiolive.rbc.cn/alive/fm1039.m3u8
 文艺广播 https://brtv-radiolive.rbc.cn/alive/fm876.m3u8
-外语广播 https://brtv-radiolive.rbc.cn/alive/fm923.m3u8
-青年广播 https://brtv-radiolive.rbc.cn/alive/fm982.m3u8
+外语广播 https://brtv-radiolive.rbc.cn/alive/fm923.m3u8 无声音
+青年广播 https://brtv-radiolive.rbc.cn/alive/fm982.m3u8 无声音
 京津冀之声 https://brtv-radiolive.rbc.cn/alive/fm1006.m3u8
-新城1077 https://bjcdnlive.rbc.cn/alive/fm1077.m3u8
+新城1077 https://bjcdnlive.rbc.cn/alive/fm1077.m3u8 停用
 
-CNR aac-lc 192k/48.0
+CNR aac-lc 192k/48.0  HTTP 403
 http://www.radio.cn/index.php?option=default,radio
 中国之声 http://ngcdn001.cnr.cn/live/zgzs/index.m3u8
 经济之声 http://ngcdn002.cnr.cn/live/jjzs/index.m3u8
@@ -90,3 +90,4 @@ RBC aac-lc 96k/48.0 地址停用
 戏曲曲艺 http://123.56.16.201:1935/live/fm1051/96K/tzwj_video.m3u8
 欢乐时光 http://123.56.16.201:1935/live/fm1065/96K/tzwj_video.m3u8
 怀旧金曲 http://123.56.16.201:1935/live/fm1075/96K/tzwj_video.m3u8
+
